@@ -134,12 +134,12 @@ def evaluate_models(models, X, y, cv=5, random_state=42):
         cv_results = cross_validate(pipeline, X, y, cv=cv, scoring=scoring, n_jobs=-1)
         
         results_list.append({
-            "Model": name,
-            "Mean Accuracy": cv_results["test_accuracy"].mean(),
-            "Std": cv_results["test_accuracy"].std(),
-            "Mean Precision": cv_results["test_precision"].mean(),
-            "Mean Recall": cv_results["test_recall"].mean(),
-            "Mean F1": cv_results["test_f1"].mean()
+            "model": name,
+            "accuracy_mean": cv_results["test_accuracy"].mean(),
+            "accuracy_std": cv_results["test_accuracy"].std(),
+            "precision_mean": cv_results["test_precision"].mean(),
+            "recall_mean": cv_results["test_recall"].mean(),
+            "f1_mean": cv_results["test_f1"].mean()
         })
 
     return pd.DataFrame(results_list)
