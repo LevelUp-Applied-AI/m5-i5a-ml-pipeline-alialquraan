@@ -210,8 +210,9 @@ if __name__ == "__main__":
             recommend_model(results)
 
             # Task 5: Select best model based on F1-score (excluding dummy baselines)
-            real_models_df = results[~results['Model'].str.contains('Dummy')]
-            best_model_name = real_models_df.loc[real_models_df['Mean F1'].idxmax(), 'Model']
+            real_models_df = results[~results['model'].str.contains('Dummy')]
+            best_model_name = real_models_df.loc[real_models_df['f1_mean'].idxmax(), 'model']
+            
             
             print(f"\n---> Selected Best Model: {best_model_name}")
             
@@ -222,7 +223,7 @@ if __name__ == "__main__":
                 print(f"{metric.capitalize()}: {value:.4f}")
 
             # Verification: Compare CV Mean F1 with Test F1
-            cv_f1 = real_models_df.loc[real_models_df['Model'] == best_model_name, 'Mean F1'].values[0]
+            cv_f1 = real_models_df.loc[real_models_df['model'] == best_model_name, 'f1_mean'].values[0]
             print(f"CV Mean F1: {cv_f1:.4f} vs Test F1: {final_metrics['f1']:.4f}")
 
                 # Task 5: final evaluation on the held-out test set.
